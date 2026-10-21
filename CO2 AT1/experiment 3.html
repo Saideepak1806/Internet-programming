@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { font-family: Arial; }
+.box { padding: 20px; background: lightblue; margin: 5px; }
+main { display: flex; }
+* { box-sizing: border-box; }
+@media(max-width: 500px) {
+  main { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<h2>CSS Layout Debugging</h2>
+<button onclick="fix()">Fix Layout</button>
+<button onclick="reset()">Reset</button>
+
+<main id="layout">
+  <div class="box">Box 1</div>
+  <div class="box">Box 2</div>
+</main>
+
+<p id="msg">Click Fix Layout to correct the alignment.</p>
+
+<script>
+function fix() {
+  document.getElementById("layout").style.flexDirection = "column";
+  document.getElementById("msg").innerHTML =
+    "Layout fixed! Boxes are arranged vertically.";
+}
+function reset() {
+  document.getElementById("layout").style.flexDirection = "row";
+  document.getElementById("msg").innerHTML =
+    "Layout reset to horizontal.";
+}
+</script>
+
+</body>
+</html>

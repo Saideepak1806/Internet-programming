@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<h3>Registration Form</h3>
+<form onsubmit="return check()">
+  Email: <input id="email" type="text" oninput="check()">
+  <span id="e"></span><br><br>
+  Phone: <input id="phone" type="text" oninput="check()">
+  <span id="p"></span><br><br>
+  <button type="submit">Register</button>
+</form>
+
+<script>
+function check() {
+  let a = document.getElementById("email").value;
+  let b = document.getElementById("phone").value;
+  let x = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a);
+  let y = /^[0-9]{10}$/.test(b);
+
+  document.getElementById("e").innerHTML =
+    x ? "Valid" : "Invalid email";
+  document.getElementById("p").innerHTML =
+    y ? "Valid" : "Enter 10 digits";
+
+  return x && y;
+}
+</script>
+</body>
+</html>
