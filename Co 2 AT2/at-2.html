@@ -1,0 +1,491 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CO-2 Responsive Web Design</title>
+
+<style>
+/* GENERAL STYLING */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #222;
+    background: #f4f6f9;
+}
+
+section {
+    padding: 30px 6%;
+    margin-bottom: 15px;
+    background: white;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+    color: #163a70;
+}
+
+button, a {
+    cursor: pointer;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #1769aa;
+    color: white;
+}
+
+button:hover {
+    background: #104c80;
+}
+
+/* QUESTION 1: RESPONSIVE NAVIGATION BAR */
+.navbar {
+    background: #163a70;
+    color: white;
+    padding: 15px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: #ffd166;
+}
+
+.menu-btn {
+    display: none;
+    font-size: 22px;
+}
+
+/* QUESTION 2: PRODUCT HOVER EFFECT */
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 20px;
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px #0002;
+}
+
+.product-image {
+    height: 140px;
+    background: #e7effa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 65px;
+}
+
+.product-card h3 {
+    margin: 12px 0 5px;
+}
+
+.price {
+    color: #16834a;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* QUESTION 3: DASHBOARD USING CSS GRID */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat {
+    padding: 25px;
+    background: #e7effa;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat h3 {
+    color: #163a70;
+    font-size: 25px;
+}
+
+.dashboard-wide {
+    grid-column: 1 / -1;
+    padding: 25px;
+    background: #dcefe4;
+    border-radius: 8px;
+}
+
+/* QUESTION 4: MOBILE-FIRST BLOG */
+.blog-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.blog-post, .sidebar {
+    padding: 20px;
+    background: #f4f6f9;
+    border-radius: 8px;
+}
+
+.blog-post h3 {
+    margin-bottom: 8px;
+}
+
+.blog-post p {
+    margin-bottom: 10px;
+}
+
+.blog-post a {
+    color: #1769aa;
+}
+
+/* QUESTION 5: JAVASCRIPT DYNAMIC MENU */
+.dynamic-menu {
+    background: #e7effa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.dynamic-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin-top: 15px;
+}
+
+.dynamic-links a {
+    color: #163a70;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dynamic-links a:hover {
+    color: #d35400;
+}
+
+.status {
+    margin-top: 12px;
+    color: #16834a;
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (min-width: 768px) {
+    .blog-layout {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #163a70;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 6%;
+        z-index: 10;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-wide {
+        grid-column: auto;
+    }
+
+    .dynamic-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* REDUCE ANIMATION FOR ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- QUESTION 1: RESPONSIVE NAVIGATION -->
+<nav class="navbar">
+    <div class="logo">ShopEasy</div>
+
+    <button class="menu-btn"
+            id="menuBtn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks">
+        ☰
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="home">
+    <h1>Responsive Web Design</h1>
+    <p>
+        Welcome! This website demonstrates responsive CSS layouts,
+        product hover effects, CSS Grid and JavaScript events.
+    </p>
+</section>
+
+<!-- QUESTION 2: PRODUCT HOVER EFFECT -->
+<section id="products">
+    <h2>Question 2: Product Hover Effect</h2>
+
+    <div class="products">
+        <article class="product-card">
+            <div class="product-image" aria-hidden="true">💻</div>
+            <h3>Laptop</h3>
+            <p class="price">₹45,000</p>
+            <button type="button"
+                    onclick="addToCart('Laptop')">
+                Add to Cart
+            </button>
+        </article>
+
+        <article class="product-card">
+            <div class="product-image" aria-hidden="true">📱</div>
+            <h3>Smartphone</h3>
+            <p class="price">₹20,000</p>
+            <button type="button"
+                    onclick="addToCart('Smartphone')">
+                Add to Cart
+            </button>
+        </article>
+
+        <article class="product-card">
+            <div class="product-image" aria-hidden="true">🎧</div>
+            <h3>Headphones</h3>
+            <p class="price">₹2,000</p>
+            <button type="button"
+                    onclick="addToCart('Headphones')">
+                Add to Cart
+            </button>
+        </article>
+    </div>
+
+    <p id="cartMessage" class="status" aria-live="polite"></p>
+</section>
+
+<!-- QUESTION 3: FLEXBOX VS GRID DASHBOARD -->
+<section id="dashboard">
+    <h2>Question 3: Dashboard Using CSS Grid</h2>
+
+    <p>
+        CSS Grid is suitable for two-dimensional layouts containing
+        multiple rows and columns. Flexbox is useful for arranging
+        items in a single row or column.
+    </p>
+
+    <div class="dashboard">
+        <div class="stat">
+            <h3>120</h3>
+            <p>Total Products</p>
+        </div>
+
+        <div class="stat">
+            <h3>85</h3>
+            <p>Orders</p>
+        </div>
+
+        <div class="stat">
+            <h3>₹25,000</h3>
+            <p>Total Sales</p>
+        </div>
+
+        <div class="dashboard-wide">
+            <h3>Sales Overview</h3>
+            <p>
+                Sales information and reports can be displayed
+                in this full-width dashboard area.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- QUESTION 4: MOBILE-FIRST BLOG -->
+<section id="blog">
+    <h2>Question 4: Mobile-First Blog Layout</h2>
+
+    <div class="blog-layout">
+        <main>
+            <article class="blog-post">
+                <h3>Introduction to Web Development</h3>
+                <p>
+                    HTML creates the structure of a webpage.
+                    CSS controls its appearance and layout.
+                    JavaScript adds interactivity.
+                </p>
+                <a href="#contact">Read More</a>
+            </article>
+
+            <article class="blog-post" style="margin-top: 15px;">
+                <h3>Why Responsive Design Matters</h3>
+                <p>
+                    Responsive design helps websites adapt to
+                    mobile phones, tablets and desktop screens.
+                </p>
+                <a href="#contact">Read More</a>
+            </article>
+        </main>
+
+        <aside class="sidebar">
+            <h3>Blog Sidebar</h3>
+            <p>Recent Posts</p>
+            <p>Web Design</p>
+            <p>CSS Tutorials</p>
+            <p>JavaScript Basics</p>
+        </aside>
+    </div>
+</section>
+
+<!-- QUESTION 5: JAVASCRIPT EVENT HANDLING -->
+<section id="contact">
+    <h2>Question 5: JavaScript Dynamic Menu</h2>
+
+    <p>
+        Click the button to show or hide the dynamic menu.
+        You can also use the links to navigate to page sections.
+    </p>
+
+    <div class="dynamic-menu">
+        <button type="button"
+                id="dynamicBtn"
+                aria-expanded="true"
+                aria-controls="dynamicLinks">
+            Hide Menu
+        </button>
+
+        <ul class="dynamic-links" id="dynamicLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#blog">Blog</a></li>
+        </ul>
+
+        <p id="menuStatus" class="status" aria-live="polite">
+            Menu is visible.
+        </p>
+    </div>
+</section>
+
+<script>
+// QUESTION 1: RESPONSIVE NAVIGATION TOGGLE
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", function () {
+    const isOpen = navLinks.classList.toggle("active");
+
+    menuBtn.setAttribute("aria-expanded", isOpen);
+    menuBtn.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu"
+    );
+});
+
+// Close the mobile navigation after selecting a link
+navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+        navLinks.classList.remove("active");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open navigation menu");
+    });
+});
+
+// QUESTION 2: PRODUCT INTERACTION
+function addToCart(productName) {
+    document.getElementById("cartMessage").textContent =
+        productName + " added to cart!";
+}
+
+// QUESTION 5: DYNAMIC MENU EVENT HANDLING
+const dynamicBtn = document.getElementById("dynamicBtn");
+const dynamicLinks = document.getElementById("dynamicLinks");
+const menuStatus = document.getElementById("menuStatus");
+
+dynamicBtn.addEventListener("click", function () {
+    const isVisible = dynamicLinks.hidden;
+
+    dynamicLinks.hidden = !isVisible;
+    dynamicBtn.textContent = isVisible ? "Hide Menu" : "Show Menu";
+    dynamicBtn.setAttribute("aria-expanded", isVisible);
+    menuStatus.textContent = isVisible
+        ? "Menu is visible."
+        : "Menu is hidden.";
+});
+</script>
+
+</body>
+</html>
+```

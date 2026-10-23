@@ -1,0 +1,596 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMATS - Internet Programming CO-2</title>
+
+<style>
+/* GENERAL STYLES */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: #f3f6fa;
+    color: #222;
+}
+
+header {
+    background: #173b70;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    background: #102a50;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 5px;
+}
+
+nav a:hover,
+nav a:focus {
+    background: #315d95;
+}
+
+section {
+    background: white;
+    margin: 20px auto;
+    padding: 25px;
+    width: 92%;
+    max-width: 1100px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #00000012;
+}
+
+h2 {
+    color: #173b70;
+    border-bottom: 2px solid #dbe5f2;
+    padding-bottom: 8px;
+}
+
+h3 {
+    color: #315d95;
+}
+
+button {
+    background: #1769aa;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+button:hover {
+    background: #104875;
+}
+
+input {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.result {
+    font-weight: bold;
+    color: #087443;
+    margin-top: 12px;
+}
+
+.error {
+    color: #c62828;
+    font-weight: bold;
+}
+
+/* QUESTION 1: RESPONSIVE WEB DESIGN */
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.responsive-box {
+    background: #dceafa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* QUESTION 2: FORM VALIDATION */
+.form-demo {
+    background: #f5f8fc;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* QUESTION 3: BOX MODEL */
+.box-model {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 5px solid #1769aa;
+    margin: 15px 0;
+    background: #dceafa;
+}
+
+/* QUESTION 4: DOM MANIPULATION */
+.dom-box {
+    padding: 15px;
+    background: #f0f5fb;
+    border-radius: 8px;
+}
+
+/* QUESTION 6: PRODUCT CARDS */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 3px 8px #00000012;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px #00000020;
+}
+
+.product-icon {
+    font-size: 55px;
+}
+
+/* QUESTION 7: NAVIGATION */
+.demo-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #173b70;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.demo-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+}
+
+/* QUESTION 8: REGISTRATION */
+.form-message {
+    min-height: 24px;
+}
+
+/* QUESTION 10: PRICE CALCULATOR */
+.price-panel {
+    background: #f0f5fb;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.price-total {
+    font-size: 24px;
+    color: #087443;
+    font-weight: bold;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .responsive-grid,
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    section {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .responsive-grid,
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>SIMATS ENGINEERING</h1>
+    <p>Internet Programming - CO-2</p>
+    <p>Responsive Web Design and JavaScript Interactivity</p>
+</header>
+
+<nav aria-label="Main navigation">
+    <a href="#q1">Responsive Design</a>
+    <a href="#q2">Validation</a>
+    <a href="#q3">Box Model</a>
+    <a href="#q4">DOM</a>
+    <a href="#q5">Layouts</a>
+    <a href="#q6">Products</a>
+    <a href="#q7">Menu</a>
+    <a href="#q8">Registration</a>
+    <a href="#q9">Welcome</a>
+    <a href="#q10">Price</a>
+</nav>
+
+<!-- QUESTION 1 -->
+<section id="q1">
+    <h2>Question 1: Responsive Web Design</h2>
+
+    <p>
+        Responsive web design makes a website adapt to mobile phones,
+        tablets and desktops using flexible layouts, CSS Grid and media queries.
+    </p>
+
+    <div class="responsive-grid">
+        <div class="responsive-box">Home</div>
+        <div class="responsive-box">Courses</div>
+        <div class="responsive-box">Contact</div>
+    </div>
+
+    <p>
+        Resize the browser window to see the layout change.
+        Three columns appear on desktop, two on tablets and one on small phones.
+    </p>
+</section>
+
+<!-- QUESTION 2 -->
+<section id="q2">
+    <h2>Question 2: Client-Side Validation</h2>
+
+    <p>
+        Client-side validation checks user input before form submission.
+        JavaScript events and regular expressions can validate input formats.
+    </p>
+
+    <form id="emailForm" class="form-demo" novalidate>
+        <label for="email">Email Address:</label>
+        <input type="text" id="email"
+               placeholder="example@email.com"
+               autocomplete="email" required>
+
+        <button type="submit">Validate Email</button>
+        <p id="emailMessage" class="form-message" aria-live="polite"></p>
+    </form>
+</section>
+
+<!-- QUESTION 3 -->
+<section id="q3">
+    <h2>Question 3: CSS Box Model and Positioning</h2>
+
+    <p>
+        The CSS box model consists of content, padding, border and margin.
+        Incorrect widths, spacing and positioning can cause layouts to break.
+    </p>
+
+    <div class="box-model">
+        <strong>Content</strong>
+        <p>Padding is inside the border. Margin is outside the border.</p>
+    </div>
+
+    <p>
+        The box-sizing property, flexible widths and media queries help
+        prevent overflow when the browser window is resized.
+    </p>
+</section>
+
+<!-- QUESTION 4 -->
+<section id="q4">
+    <h2>Question 4: DOM Manipulation</h2>
+
+    <p>
+        The Document Object Model (DOM) represents an HTML page as objects.
+        JavaScript can modify text and styles without reloading the page.
+    </p>
+
+    <div class="dom-box">
+        <h3 id="domHeading">Welcome to Internet Programming</h3>
+        <button type="button" id="domButton">Change Content</button>
+        <button type="button" id="colorButton">Change Color</button>
+    </div>
+</section>
+
+<!-- QUESTION 5 -->
+<section id="q5">
+    <h2>Question 5: Responsive Layout</h2>
+
+    <p>
+        CSS media queries and flexible layouts help a college website
+        display correctly on desktop, tablet and mobile devices.
+    </p>
+
+    <div class="responsive-grid">
+        <div class="responsive-box">
+            <h3>Admissions</h3>
+            <p>Admission information</p>
+        </div>
+
+        <div class="responsive-box">
+            <h3>Departments</h3>
+            <p>Academic departments</p>
+        </div>
+
+        <div class="responsive-box">
+            <h3>Student Portal</h3>
+            <p>Student services</p>
+        </div>
+    </div>
+</section>
+
+<!-- QUESTION 6 -->
+<section id="q6">
+    <h2>Question 6: CSS Styling for Product Cards</h2>
+
+    <p>
+        Colors, borders, shadows, spacing and hover transitions improve
+        the visual appearance of product cards.
+    </p>
+
+    <div class="product-grid">
+        <article class="product-card">
+            <div class="product-icon" aria-hidden="true">💻</div>
+            <h3>Laptop</h3>
+            <p>Price: ₹45,000</p>
+            <button type="button" class="cart-button"
+                    data-product="Laptop">Add to Cart</button>
+        </article>
+
+        <article class="product-card">
+            <div class="product-icon" aria-hidden="true">📱</div>
+            <h3>Smartphone</h3>
+            <p>Price: ₹20,000</p>
+            <button type="button" class="cart-button"
+                    data-product="Smartphone">Add to Cart</button>
+        </article>
+
+        <article class="product-card">
+            <div class="product-icon" aria-hidden="true">🎧</div>
+            <h3>Headphones</h3>
+            <p>Price: ₹2,000</p>
+            <button type="button" class="cart-button"
+                    data-product="Headphones">Add to Cart</button>
+        </article>
+    </div>
+
+    <p id="cartMessage" class="result" aria-live="polite"></p>
+</section>
+
+<!-- QUESTION 7 -->
+<section id="q7">
+    <h2>Question 7: Navigation Menu</h2>
+
+    <p>
+        Flexbox, flexible widths and media queries prevent menu links
+        from overlapping content on smaller screens.
+    </p>
+
+    <nav class="demo-nav" aria-label="Example navigation">
+        <a href="#q1">Home</a>
+        <a href="#q5">Courses</a>
+        <a href="#q6">Products</a>
+        <a href="#q8">Register</a>
+    </nav>
+
+    <p>
+        Resize the screen. The navigation links wrap on smaller screens
+        rather than overflowing horizontally.
+    </p>
+</section>
+
+<!-- QUESTION 8 -->
+<section id="q8">
+    <h2>Question 8: JavaScript Registration Validation</h2>
+
+    <p>
+        JavaScript checks required fields and displays an error message
+        before accepting a registration form.
+    </p>
+
+    <form id="registerForm" novalidate>
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName"
+               placeholder="Enter your name"
+               autocomplete="name" required>
+
+        <label for="regEmail">Email:</label>
+        <input type="email" id="regEmail"
+               placeholder="Enter your email"
+               autocomplete="email" required>
+
+        <button type="submit">Register</button>
+        <p id="registerMessage" class="form-message"
+           aria-live="polite"></p>
+    </form>
+</section>
+
+<!-- QUESTION 9 -->
+<section id="q9">
+    <h2>Question 9: Interactive Welcome Button</h2>
+
+    <p>
+        The JavaScript click event displays a welcome message
+        when the user presses the button.
+    </p>
+
+    <button type="button" id="welcomeButton">Click Here</button>
+    <p id="welcomeMessage" class="result" aria-live="polite"></p>
+</section>
+
+<!-- QUESTION 10 -->
+<section id="q10">
+    <h2>Question 10: Dynamic Product Price</h2>
+
+    <div class="price-panel">
+        <h3>Product: Headphones</h3>
+        <p>Price per item: ₹1,000</p>
+
+        <label for="quantity">Select Quantity (1-100):</label>
+        <input type="number" id="quantity"
+               value="1" min="1" max="100" step="1">
+
+        <p>Total Price:</p>
+        <p id="totalPrice" class="price-total"
+           aria-live="polite">₹1,000</p>
+        <p id="priceMessage" class="form-message"></p>
+    </div>
+</section>
+
+<footer style="text-align:center; padding:25px; background:#173b70; color:white;">
+    <p>SIMATS ENGINEERING | Internet Programming | CO-2</p>
+</footer>
+
+<script>
+// QUESTION 2: EMAIL VALIDATION
+document.getElementById("emailForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("emailMessage");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (email === "" || !emailPattern.test(email)) {
+        message.textContent = "Please enter a valid email address.";
+        message.className = "form-message error";
+    } else {
+        message.textContent = "Email format is valid.";
+        message.className = "form-message result";
+    }
+});
+
+// QUESTION 4: DOM MANIPULATION
+document.getElementById("domButton").addEventListener("click", function() {
+    document.getElementById("domHeading").textContent =
+        "The DOM content has been updated!";
+});
+
+document.getElementById("colorButton").addEventListener("click", function() {
+    const heading = document.getElementById("domHeading");
+    heading.style.color =
+        heading.style.color === "green" ? "#173b70" : "green";
+});
+
+// QUESTION 6: PRODUCT CARD INTERACTION
+document.querySelectorAll(".cart-button").forEach(function(button) {
+    button.addEventListener("click", function() {
+        const product = button.dataset.product;
+        document.getElementById("cartMessage").textContent =
+            product + " added to cart!";
+    });
+});
+
+// QUESTION 8: REGISTRATION FORM VALIDATION
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
+    const message = document.getElementById("registerMessage");
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (name === "" || email === "") {
+        message.textContent = "Please fill in all required fields.";
+        message.className = "form-message error";
+    } else if (!emailPattern.test(email)) {
+        message.textContent = "Please enter a valid email address.";
+        message.className = "form-message error";
+    } else {
+        message.textContent = "Form validation successful!";
+        message.className = "form-message result";
+    }
+});
+
+// QUESTION 9: INTERACTIVE BUTTON
+document.getElementById("welcomeButton").addEventListener("click", function() {
+    document.getElementById("welcomeMessage").textContent =
+        "Welcome to our E-Learning Website!";
+});
+
+// QUESTION 10: DYNAMIC PRICE CALCULATION
+const quantityInput = document.getElementById("quantity");
+const totalPrice = document.getElementById("totalPrice");
+const priceMessage = document.getElementById("priceMessage");
+const unitPrice = 1000;
+
+function updatePrice() {
+    const quantity = Number(quantityInput.value);
+
+    if (
+        quantityInput.value.trim() === "" ||
+        !Number.isInteger(quantity) ||
+        quantity < 1 ||
+        quantity > 100
+    ) {
+        totalPrice.textContent = "--";
+        priceMessage.textContent = "Enter a whole number from 1 to 100.";
+        priceMessage.className = "form-message error";
+        return;
+    }
+
+    const total = unitPrice * quantity;
+
+    totalPrice.textContent = "₹" + total.toLocaleString("en-IN");
+    priceMessage.textContent = "";
+}
+
+quantityInput.addEventListener("input", updatePrice);
+</script>
+
+</body>
+</html>
+```
