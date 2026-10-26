@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Experiment 8 - Hospital Appointment</title>
+<style>body{font-family:Arial;margin:20px;background:#f4f9ff}section{background:white;padding:15px;margin:12px 0;border:1px solid #ccc}input,select,button{padding:8px;margin:5px}</style></head>
+<body><h1>MedCare Hospital</h1><section><h2>Find a Doctor</h2><input id="location" placeholder="Enter city or area"><select id="specialty"><option>General Physician</option><option>Cardiologist</option><option>Dentist</option><option>Dermatologist</option><option>Pediatrician</option></select><button onclick="findDoctor()">Search</button><p id="doctorResult"></p></section>
+<section><h2>Book Appointment</h2><input id="patient" placeholder="Patient name"><input type="date" id="date"><select id="slot"><option>9:00 AM</option><option>11:00 AM</option><option>2:00 PM</option><option>4:00 PM</option></select><button onclick="book()">Book Appointment</button><p id="appointment"></p><button onclick="cancel()">Cancel Appointment</button></section>
+<section><h2>Feedback</h2><input id="rating" type="number" min="1" max="5" placeholder="Rating 1-5"><button onclick="feedback()">Submit Rating</button><p id="ratingMsg"></p></section>
+<script>
+function findDoctor(){doctorResult.innerText=location.value?'Dr. Kumar - '+specialty.value+' near '+location.value+'.':'Enter a location.'}
+function book(){if(!patient.value.trim()||!date.value){alert('Enter patient name and date.');return}appointment.innerText='Appointment booked for '+patient.value+' on '+date.value+' at '+slot.value+'. (Demo)'}
+function cancel(){appointment.innerText='Appointment cancelled.'}
+function feedback(){let r=Number(rating.value);ratingMsg.innerText=r>=1&&r<=5?'Thank you. You rated us '+r+'/5.':'Enter a rating from 1 to 5.'}
+</script></body></html>

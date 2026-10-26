@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Experiment 3 - Bus Ticket</title>
+<style>body{font-family:Arial;margin:20px;background:#f5f5f5}section{background:white;border:1px solid #ccc;padding:15px;margin:12px 0}input,select,button{padding:8px;margin:5px}</style></head>
+<body><h1>QuickBus Ticket Booking</h1><section><h2>Search Bus</h2><input id="from" placeholder="From"><input id="to" placeholder="To"><input type="date" id="date"><button onclick="findBus()">Find Buses</button><p id="searchMsg"></p></section>
+<section><h2>Available Bus</h2><p>Express Travels | AC Sleeper | 9:00 PM | ₹650</p><label>Select seat <select id="seat"><option>1A</option><option>1B</option><option>2A</option><option>2B</option></select></label><input id="passenger" placeholder="Passenger name"><button onclick="book()">Book Ticket</button><p id="ticket"></p></section>
+<section><h2>Cancel Ticket</h2><button onclick="cancel()">Cancel My Ticket</button></section>
+<script>
+function findBus(){let f=document.getElementById('from').value,t=document.getElementById('to').value,d=document.getElementById('date').value;document.getElementById('searchMsg').innerText=f&&t&&d?'Bus available from '+f+' to '+t+' on '+d+'.':'Enter route and journey date.'}
+function book(){let n=document.getElementById('passenger').value.trim();if(!n){alert('Enter passenger name');return}document.getElementById('ticket').innerText='Ticket confirmed for '+n+'. Seat: '+document.getElementById('seat').value+'. PNR: QB'+Math.floor(10000+Math.random()*90000)}
+function cancel(){document.getElementById('ticket').innerText='Ticket cancelled.'}
+</script></body></html>

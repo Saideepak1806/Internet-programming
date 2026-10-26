@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Experiment 2 - Hotel Booking</title>
+<style>body{font-family:Arial;margin:20px;background:#f7f7f7}header,section{background:white;padding:15px;margin:12px 0;border:1px solid #ccc}input,select,button{padding:8px;margin:5px}</style></head>
+<body><header><h1>StayEasy Hotel Booking</h1><p>Find a room for your next trip.</p></header>
+<section><h2>Search Rooms</h2><label>Destination <input id="place" placeholder="City"></label><label>Check-in <input type="date" id="checkin"></label><label>Check-out <input type="date" id="checkout"></label><label>Guests <select id="guests"><option>1</option><option>2</option><option>3</option><option>4</option></select></label><button onclick="search()">Search</button><p id="result"></p></section>
+<section><h2>Available Rooms</h2><p>Standard Room - ₹2,000 per night</p><button onclick="book('Standard Room',2000)">Book Standard</button><p>Deluxe Room - ₹3,500 per night</p><button onclick="book('Deluxe Room',3500)">Book Deluxe</button></section>
+<section><h2>My Booking</h2><p id="booking">No booking selected.</p><button onclick="cancelBooking()">Cancel Booking</button></section>
+<script>
+function search(){let p=document.getElementById('place').value;let a=document.getElementById('checkin').value,b=document.getElementById('checkout').value;document.getElementById('result').innerText=p&&a&&b?(b>a?'Rooms found for '+p+'. Choose a room below.':'Check-out must be after check-in.'):'Enter destination and dates.'}
+function book(room,price){let a=new Date(document.getElementById('checkin').value),b=new Date(document.getElementById('checkout').value);let nights=(b-a)/86400000;if(!Number.isFinite(nights)||nights<1){alert('Choose valid check-in and check-out dates first.');return}document.getElementById('booking').innerText=room+' booked for '+nights+' night(s). Total: ₹'+(nights*price)}
+function cancelBooking(){document.getElementById('booking').innerText='Booking cancelled.'}
+</script></body></html>

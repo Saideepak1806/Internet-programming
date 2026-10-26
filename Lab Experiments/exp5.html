@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Experiment 5 - Flight Reservation</title>
+<style>body{font-family:Arial;margin:20px;background:#f5f5f5}section{background:white;padding:15px;margin:12px 0;border:1px solid #ccc}input,select,button{padding:8px;margin:5px}</style></head>
+<body><h1>SkyWay Flight Booking</h1><section><h2>Search Flight</h2><input id="from" placeholder="From airport"><input id="to" placeholder="To airport"><input type="date" id="date"><select id="travelClass"><option>Economy</option><option>Business</option><option>First Class</option></select><button onclick="search()">Search Flights</button><p id="flightResult"></p></section>
+<section><h2>Book Ticket</h2><input id="passenger" placeholder="Passenger name"><button onclick="book()">Book Selected Flight</button><p id="ticket"></p><button onclick="printTicket()">Print Ticket</button><button onclick="cancel()">Cancel Ticket</button></section>
+<section><h2>Customer Feedback</h2><textarea id="feedback" placeholder="Write feedback"></textarea><button onclick="sendFeedback()">Submit Feedback</button><p id="feedbackMsg"></p></section>
+<script>
+function search(){flightResult.innerText=from.value&&to.value&&date.value?'Flight found: '+from.value+' → '+to.value+' | '+date.value+' | '+travelClass.value+' | ₹4,500 (demo).':'Enter route and date.'}
+function book(){if(!passenger.value.trim()||!date.value){alert('Enter passenger name and search a flight date.');return}ticket.innerText='E-ticket confirmed for '+passenger.value+'. Booking ID: FL'+Math.floor(10000+Math.random()*90000)}
+function printTicket(){if(!ticket.innerText){alert('Book a ticket first');return}window.print()}
+function cancel(){ticket.innerText='Ticket cancelled.'}
+function sendFeedback(){feedbackMsg.innerText=feedback.value.trim()?'Thank you for your feedback.':'Please enter feedback.'}
+</script></body></html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Experiment 7 - Beauty Parlour</title>
+<style>body{font-family:Arial;margin:20px;background:#fff7fb}section{background:white;padding:15px;margin:12px 0;border:1px solid #ccc}input,select,button{padding:8px;margin:5px}</style></head>
+<body><h1>Glow Beauty Parlour</h1><section><h2>Book an Appointment</h2><label>Service <select id="service"><option value="300">Haircut - ₹300</option><option value="500">Facial - ₹500</option><option value="800">Hair Spa - ₹800</option></select></label><label>Stylist <select id="stylist"><option>Anu</option><option>Priya</option><option>Meena</option></select></label><input type="date" id="date"><select id="time"><option>10:00 AM</option><option>12:00 PM</option><option>3:00 PM</option><option>5:00 PM</option></select><input id="customer" placeholder="Your name"><button onclick="book()">Book</button><p id="result"></p></section>
+<section><h2>Manage Appointment</h2><button onclick="cancel()">Cancel Appointment</button></section>
+<script>
+let booked=false;function book(){if(!customer.value.trim()||!date.value){alert('Enter your name and appointment date.');return}booked=true;result.innerText='Appointment booked for '+customer.value+' on '+date.value+' at '+time.value+'. Service: '+service.options[service.selectedIndex].text+'. Stylist: '+stylist.value+'.'}
+function cancel(){result.innerText=booked?'Appointment cancelled.':'No appointment to cancel.';booked=false}
+</script></body></html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experiment 1 - Library</title>
+<style>body{font-family:Arial;margin:20px;background:#f5f5f5}header,section{background:white;padding:15px;margin:12px 0;border:1px solid #ccc}input,button,select{padding:7px;margin:4px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #bbb;padding:8px;text-align:left}</style></head>
+<body><header><h1>College Library</h1><p>Search books, borrow books and view your borrowing history.</p></header>
+<section><h2>Book Catalog</h2><input id="search" placeholder="Search by title or author"><button onclick="searchBooks()">Search</button>
+<table><thead><tr><th>Book</th><th>Author</th><th>Status</th><th>Action</th></tr></thead><tbody id="books">
+<tr><td>Web Programming</td><td>R. Sharma</td><td>Available</td><td><button onclick="borrow(this)">Borrow</button></td></tr>
+<tr><td>Data Structures</td><td>Mark Allen</td><td>Available</td><td><button onclick="borrow(this)">Borrow</button></td></tr>
+<tr><td>Computer Networks</td><td>Andrew Tanenbaum</td><td>Issued</td><td>-</td></tr></tbody></table></section>
+<section><h2>Student Login</h2><input id="student" placeholder="Student name"><button onclick="login()">Login</button><p id="msg"></p></section>
+<section><h2>Contact Librarian</h2><input placeholder="Your email"><input placeholder="Message"><button onclick="alert('Message submitted')">Send</button></section>
+<script>
+function searchBooks(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('#books tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none')}
+function borrow(b){let r=b.closest('tr');r.cells[2].innerText='Issued';r.cells[3].innerText='Borrowed';alert('Book issued. Please return it by the due date.')}
+function login(){let n=document.getElementById('student').value.trim();document.getElementById('msg').innerText=n?'Welcome, '+n+'!':'Enter your name first.'}
+</script></body></html>

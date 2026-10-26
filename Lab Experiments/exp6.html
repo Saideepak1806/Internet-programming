@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Experiment 6 - Cake Order</title>
+<style>body{font-family:Arial;margin:20px;background:#fff8f5}section{background:white;padding:15px;margin:12px 0;border:1px solid #ccc}button,input,select{padding:8px;margin:5px}</style></head>
+<body><h1>Sweet Cake Shop</h1><section><h2>Choose a Cake</h2><label>Cake <select id="cake"><option value="500">Chocolate Cake - ₹500</option><option value="650">Black Forest - ₹650</option><option value="800">Red Velvet - ₹800</option></select></label><label>Size <select id="size"><option value="1">Small</option><option value="1.5">Medium</option><option value="2">Large</option></select></label><input id="message" placeholder="Cake message"><input id="address" placeholder="Delivery address"><input type="date" id="delivery"><button onclick="order()">Place Order</button><p id="orderMsg"></p></section>
+<section><h2>Order Status</h2><button onclick="track()">Track Order</button><p id="status"></p></section>
+<script>
+let orderId='';function order(){if(!address.value.trim()||!delivery.value){alert('Enter delivery address and date.');return}orderId='CK'+Math.floor(1000+Math.random()*9000);let total=Math.round(Number(cake.value)*Number(size.value));orderMsg.innerText='Order '+orderId+' placed. Total: ₹'+total+'. Message: '+(message.value||'No message')+'.';status.innerText='Order received'}
+function track(){status.innerText=orderId?'Order '+orderId+': Preparing your cake.':'Place an order first.'}
+</script></body></html>
