@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Management</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid gray;
+            border-radius: 8px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 6px;
+            width: 80%;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            padding: 8px;
+        }
+
+        th {
+            background: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Product Management System</h2>
+
+    <form onsubmit="return addProduct()">
+        <input type="text" id="name"
+               placeholder="Product Name" required>
+
+        <input type="number" id="price"
+               placeholder="Product Price"
+               min="0.01" step="0.01" required>
+
+        <input type="number" id="quantity"
+               placeholder="Quantity"
+               min="0" step="1" required>
+
+        <br>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <p id="message"></p>
+
+    <h3>Product Details</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+
+        <tbody id="productTable"></tbody>
+    </table>
+
+    <br>
+    <button onclick="clearProducts()">Clear All Products</button>
+</div>
+
+<script>
+    var products = JSON.parse(
+        localStorage.getItem("products") || "[]"
+    );
+
+    function displayProducts() {
+        var table = document.getElementById("productTable");
+        table.textContent = "";
+
+        products.forEach(function(product) {
+            var row = document.createElement("tr");
+
+            [product.id, product.name, product.price,
+             product.quantity].forEach(function(value) {
+                var cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            table.appendChild(row);
+        });
+    }
+
+    function addProduct() {
+        var name = document.getElementById("name").value.trim();
+        var price = Number(document.getElementById("price").value);
+        var quantityText = document.getElementById("quantity").value;
+        var quantity = Number(quantityText);
+
+        if (name === "" || price <= 0 ||
+            quantityText === "" || quantity < 0 ||
+            !Number.isInteger(quantity)) {
+            document.getElementById("message").textContent =
+                "Please enter valid product details.";
+            return false;
+        }
+
+        var product = {
+            id: products.length ?
+                Math.max(...products.map(function(p) {
+                    return p.id;
+                })) + 1 : 1,
+            name: name,
+            price: price.toFixed(2),
+            quantity: quantity
+        };
+
+        products.push(product);
+
+        localStorage.setItem("products", JSON.stringify(products));
+
+        displayProducts();
+
+        document.getElementById("message").textContent =
+            "Product added successfully!";
+
+        document.getElementById("name").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("quantity").value = "";
+
+        return false;
+    }
+
+    function clearProducts() {
+        products = [];
+        localStorage.removeItem("products");
+        displayProducts();
+
+        document.getElementById("message").textContent =
+            "All products cleared.";
+    }
+
+    displayProducts();
+</script>
+
+</body>
+</html>

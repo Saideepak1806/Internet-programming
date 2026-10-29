@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Login</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .box {
+            background: white;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid gray;
+            border-radius: 8px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #dashboard {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box" id="loginBox">
+    <h2>Student Login</h2>
+
+    <form onsubmit="return login()">
+        <input type="text" id="username"
+               placeholder="Enter Username" required>
+
+        <input type="password" id="password"
+               placeholder="Enter Password" required>
+
+        <br>
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p></div>
+
+<div class="box" id="dashboard">
+    <h2>Welcome!</h2>
+    <p id="welcomeMessage"></p>
+    <p>You have successfully logged in.</p>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+    function login() {
+        var username =
+            document.getElementById("username").value;
+
+        var password =
+            document.getElementById("password").value;
+
+        if (username === "Deepak" && password === "1234") {
+            sessionStorage.setItem("username", username);
+
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+
+            document.getElementById("welcomeMessage").textContent =
+                "Hello, " + username;
+
+        } else {
+            document.getElementById("message").textContent =
+                "Invalid username or password!";
+        }
+
+        return false;
+    }
+
+    function logout() {
+        sessionStorage.removeItem("username");
+
+        document.getElementById("dashboard").style.display = "none";
+        document.getElementById("loginBox").style.display = "block";
+
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("message").textContent =
+            "You have logged out.";
+    }
+
+    window.onload = function() {
+        var username = sessionStorage.getItem("username");
+
+        if (username) {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+            document.getElementById("welcomeMessage").textContent =
+                "Hello, " + username;
+        }
+    };
+</script>
+
+</body>
+</html>

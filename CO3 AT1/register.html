@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+            background-color: #f2f2f2;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border: 1px solid gray;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: lightblue;
+            cursor: pointer;
+        }
+
+        #result {
+            background: white;
+            padding: 15px;
+            margin-top: 20px;
+            width: 310px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form onsubmit="return registerStudent()">
+
+    <label>Name:</label>
+    <input type="text" id="name" required>
+
+    <label>Email:</label>
+    <input type="email" id="email" required>
+
+    <label>Department:</label>
+    <input type="text" id="department" required>
+
+    <button type="submit">Register</button>
+    <button type="reset" onclick="clearResult()">
+        Clear Form
+    </button>
+
+</form>
+
+<div id="result">
+    <h3>Registration Successful!</h3>
+    <p id="showName"></p>
+    <p id="showEmail"></p>
+    <p id="showDepartment"></p>
+</div>
+
+<script>
+function registerStudent() {
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let department =
+        document.getElementById("department").value.trim();
+
+    if (name === "" || email === "" || department === "") {
+        alert("Please fill in all fields");
+        return false;
+    }
+
+    document.getElementById("showName").textContent =
+        "Name: " + name;
+
+    document.getElementById("showEmail").textContent =
+        "Email: " + email;
+
+    document.getElementById("showDepartment").textContent =
+        "Department: " + department;
+
+    document.getElementById("result").style.display = "block";
+
+    alert("Student registered successfully!");
+
+    return false;
+}
+
+function clearResult() {
+    document.getElementById("result").style.display = "none";
+}
+</script>
+
+</body>
+</html>
